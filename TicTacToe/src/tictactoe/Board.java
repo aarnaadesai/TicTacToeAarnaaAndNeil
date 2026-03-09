@@ -53,19 +53,36 @@ public class Board
     //prints the current grid
     public void printGrid()
     {
-    	
+    	for (int row = 0; row < grid.length; row++) {
+    		for (int col = 0; col < grid[0].length; col++) {
+    			System.out.print(grid[row][col] + "");
+    		}
+    		System.out.println();
+    	}
     }
     
     //create a random board
     public void createRandomBoard()
     {
-    	
+    	char options[] = {'E', 'X', 'O'};
+    	for (int row = 0; row < grid.length; row++) {
+    		for (int col = 0; col < grid[0].length; col++) {
+    			int index = (int)Math.random() * options.length; // 0, 1, or 2
+    			grid[row][col] = options[index];
+    		}
+    	}
+    	saveBoardToFile();
     }
     
     //clears the grid by placing E in every cell
     public void clearBoard()
     {
-    
+    	char clearedBoard[][] = {
+    						{'E', 'E', 'E'},
+    						{'E', 'E', 'E'},
+    						{'E', 'E', 'E'}};
+    	this.grid = clearedBoard;
+    	saveBoardToFile();
     }
     
     public static void main(String args[])
