@@ -16,6 +16,13 @@ public class Board
     //non-default constructor - [5 points]
     public Board(String filename)
     {
+    	
+    	this.filename = filename;
+    	if (isValidBoardFile()) {
+    		clearedBoard();
+    	}
+    	loadBoardFromFile();
+    	}
     	 //set the file name
        //if the board is valid then create the 3x3 grid
        //and load the board from the file
@@ -40,6 +47,7 @@ public class Board
     	{
     		File file = new File("src/TicTacToe/"+this.filename);
     		Scanner scanner = new Scanner(file);
+    		int xCount = 0, oCount = 0;
     		while(scanner.hasNextLine())
     		{
     			String line = scanner.nextLine().trim();
@@ -48,7 +56,11 @@ public class Board
     				scanner.close();
     				return false;
     			}
+    			// count X and O
+    			if (line.charAt(4) == 'X') xCount++;
     		}
+    		scanner.close();
+    		return xCount == oCount || xCount == oCount + 1;
     	}
     	catch(Exception error)
     	{
@@ -56,8 +68,6 @@ public class Board
     		return false;
     	}
     }
-    scanner.close();
-    return true;
     
     
     //saves the grid to the file in the proper format (CSV)
@@ -67,6 +77,8 @@ public class Board
     	{
     		File file = new File("src/tictactoe/"+this.filename);
     		FileWriter writer = new FileWriter(file);
+    		
+    		
     		String boardContents = "";
     		for(int row = 0; row < grid.length; row++)
     		{
@@ -84,7 +96,6 @@ public class Board
     	catch(Exception error)
     	{
     		error.printStackTrace();
-    	}
     
     }
     
