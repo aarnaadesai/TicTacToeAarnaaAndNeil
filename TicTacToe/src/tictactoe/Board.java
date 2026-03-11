@@ -56,8 +56,12 @@ public class Board
     				scanner.close();
     				return false;
     			}
+<<<<<<< Updated upstream
     			// count X and O
     			if (line.charAt(4) == 'X') xCount++;
+=======
+ 
+>>>>>>> Stashed changes
     		}
     		scanner.close();
     		return xCount == oCount || xCount == oCount + 1;
