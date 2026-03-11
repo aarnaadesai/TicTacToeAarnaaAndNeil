@@ -36,8 +36,28 @@ public class Board
     //valid if it resembles a 3x3 board that contains only E, X, O
     public boolean isValidBoardFile()
     {
-    	
+    	try
+    	{
+    		File file = new File("src/TicTacToe/"+this.filename);
+    		Scanner scanner = new Scanner(file);
+    		while(scanner.hasNextLine())
+    		{
+    			String line = scanner.nextLine().trim();
+    			if(!line.matches("[EXO], [EXO], [EXO]"))
+    			{
+    				scanner.close();
+    				return false;
+    			}
+    		}
+    	}
+    	catch(Exception error)
+    	{
+    		error.printStackTrace();
+    		return false;
+    	}
     }
+    scanner.close();
+    return true;
     
     
     //saves the grid to the file in the proper format (CSV)
