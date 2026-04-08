@@ -43,6 +43,10 @@ public class Board
 		return this.grid;
 	}
 	
+	public void setGrid(char[][] newGrid)
+	{
+		this.grid = newGrid;
+	}
 		
     
     //loads the grid with the file contents - [5 points]
