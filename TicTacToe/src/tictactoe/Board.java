@@ -27,6 +27,10 @@ public class Board
        //if the board is valid then create the 3x3 grid
        //and load the board from the file
     }
+
+	public char getCell(int row, int col) {
+		return grid[row][col];
+	}
     
     //loads the grid with the file contents - [5 points]
     public void loadBoardFromFile()
