@@ -20,7 +20,7 @@ public class Board
     	this.filename = filename;
     	if (isValidBoardFile()) 
     	{
-    		clearedBoard();
+    		clearBoard();
     	}
     	loadBoardFromFile();
     	 //set the file name
