@@ -31,6 +31,14 @@ public class Board
 	public char getCell(int row, int col) {
 		return grid[row][col];
 	}
+	
+	public void setCell(int row, int col, char player)
+	{
+		grid[row][col] = player;
+		saveBoardToFile();
+		
+	}
+		
     
     //loads the grid with the file contents - [5 points]
     public void loadBoardFromFile()
