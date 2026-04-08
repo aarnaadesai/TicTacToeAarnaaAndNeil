@@ -38,6 +38,11 @@ public class Board
 		saveBoardToFile();
 		
 	}
+	
+	public char[][] getGrid() {
+		return this.grid;
+	}
+	
 		
     
     //loads the grid with the file contents - [5 points]
