@@ -18,11 +18,11 @@ public class Board
     {
     	
     	this.filename = filename;
-    	if (isValidBoardFile()) {
+    	if (isValidBoardFile()) 
+    	{
     		clearedBoard();
     	}
     	loadBoardFromFile();
-    	}
     	 //set the file name
        //if the board is valid then create the 3x3 grid
        //and load the board from the file
@@ -42,6 +42,8 @@ public class Board
         //use isValidBoard method as a guide
     	
     }
+
+  
 
     
     //valid if it resembles a 3x3 board that contains only E, X, O
@@ -104,6 +106,7 @@ public class Board
     	catch(Exception error)
     	{
     		error.printStackTrace();
+    	}
     
     }
     
