@@ -28,7 +28,28 @@ class GameLogic {
     	
     	// If the player hasn't won yet, then 
     	return false;
-    	
 
     }
+	
+	public boolean isDraw(Board board) {
+	    if (checkWin(board, 'X') || checkWin(board, 'O')) {
+	        return false;
+	    }
+
+	    for (char[] row : board.getGrid()) {
+	        for (char cell : row) {
+	            if (cell == 'E') {
+	                return false;
+	            }
+	        }
+	    }
+	    return true;
+	   
+	}
+	
+	public boolean isGameOver(Board board) {
+	    return checkWin(board, 'X') ||
+	           checkWin(board, 'O') ||
+	           isDraw(board);
+	}
 }
