@@ -58,6 +58,26 @@ public class Board
         //and populate the grid with the board values
         //remember to close the scanner afterwards 
         //use isValidBoard method as a guide
+
+		try {
+			File file = new File("src/tictactoe/"+this.filename);
+    		Scanner scanner = new Scanner(file);
+
+			int row = 0;
+			while (scanner.hasNextLine()) {
+				if (row < 3) {
+					String line = scanner.nextLine().trim()
+					grid[row][0] = line.charAt(0);
+					grid[row][1] = line.charAt(2);
+					grid[row][2] = line.charAt(4);
+					row++;
+				}
+			}
+			scanner.close();
+		}
+		catch (Exception error) {
+			error.printStackTrace();
+		}
     	
     }
 
@@ -69,7 +89,7 @@ public class Board
     {
     	try
     	{
-    		File file = new File("src/TicTacToe/"+this.filename);
+    		File file = new File("src/tictactoe/"+this.filename);
     		Scanner scanner = new Scanner(file);
     		int xCount = 0, oCount = 0;
     		while(scanner.hasNextLine())
