@@ -71,5 +71,13 @@ class GameLogic {
 			else
 				return 'O';
 		}
+
+	public boolean makeMove(Board b, int r, int c) 
+	{
+   		 if (r<0||r>2||c<0||c>2||b.getCell(r,c)!='E') return false;
+    	 board.setCell(r,c,getCurrentPlayer(b)); b.saveToFile();
+		
+  		  return true;
+		}
 	}
 }
