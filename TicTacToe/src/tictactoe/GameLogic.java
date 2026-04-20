@@ -52,4 +52,24 @@ class GameLogic {
 	           checkWin(board, 'O') ||
 	           isDraw(board);
 	}
+	
+	public char getCurrentPlayer(Board board) {
+	
+		int xCount = 0;
+		int oCount = 0;
+		
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 3; j++) {
+				if (board.getCell(i, j) == 'X')
+					xCount++;
+				if (board.getCell(i, j) == 'O')
+					oCount++;
+			}
+			
+			if (xCount == oCount) 
+				return 'X';
+			else
+				return 'O';
+		}
+	}
 }
