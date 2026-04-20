@@ -72,12 +72,13 @@ class GameLogic {
 				return 'O';
 		}
 
-	public boolean makeMove(Board b, int r, int c) 
+	public boolean makeMove(Board board, int row, int column) 
 	{
-   		 if (r<0||r>2||c<0||c>2||b.getCell(r,c)!='E') return false;
+   		 if (r<0||r>2||c<0||c>2||b.getCell(r,c)!='E') 
+			 return false;
     	 board.setCell(r,c,getCurrentPlayer(b)); b.saveToFile();
 		
-  		  return true;
+  		  	return true;
 		}
 	}
 }
