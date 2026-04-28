@@ -54,30 +54,23 @@ class GameLogic {
 	}
 	
 	public char getCurrentPlayer(Board board) {
-	
-		int xCount = 0;
-		int oCount = 0;
-		
-		for (int i = 0; i < 3; i++) {
-			for (int j = 0; j < 3; j++) {
-				if (board.getCell(i, j) == 'X')
-					xCount++;
-				if (board.getCell(i, j) == 'O')
-					oCount++;
-			}
-			
-			if (xCount == oCount) 
-				return 'X';
-			else
-				return 'O';
-		}
+    int xCount = 0;
+    int oCount = 0;
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            if (board.getCell(i, j) == 'X') xCount++;
+            if (board.getCell(i, j) == 'O') oCount++;
+        }
+    }
+    return (xCount <= oCount) ? 'X' : 'O';
+}
 
-	public boolean makeMove(Board board, int row, int column) 
-	{
-   		 if (r<0||r>2||c<0||c>2||b.getCell(r,c)!='E') 
-		 	return false;
-    	 board.setCell(r,c,getCurrentPlayer(b)); b.saveToFile();
-  		  	return true;
-		}
-	}
+public boolean makeMove(Board board, int row, int col) {
+    if (row < 0 || row > 2 || col < 0 || col > 2 || board.getCell(row, col) != 'E') {
+        return false;
+    }
+    board.setCell(row, col, getCurrentPlayer(board));
+    return true;
+}
+
 }
