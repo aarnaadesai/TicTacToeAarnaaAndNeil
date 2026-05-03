@@ -16,16 +16,17 @@ public class Board
     //non-default constructor - [5 points]
     public Board(String filename)
     {
-    	
     	this.filename = filename;
     	if (isValidBoardFile()) 
     	{
     		clearBoard();
+    		loadBoardFromFile();
     	}
-    	loadBoardFromFile();
-    	 //set the file name
-       //if the board is valid then create the 3x3 grid
-       //and load the board from the file
+    	else
+    	{
+    		grid = new char[3][3];
+    		clearBoard();
+    	}
     }
 
 	public char getCell(int row, int col) {
@@ -36,7 +37,6 @@ public class Board
 	{
 		grid[row][col] = player;
 		saveBoardToFile();
-		
 	}
 	
 	public char[][] getGrid() {
@@ -53,12 +53,6 @@ public class Board
     //loads the grid with the file contents - [5 points]
     public void loadBoardFromFile()
     {
-
-        //Use a scanner to read the board file
-        //and populate the grid with the board values
-        //remember to close the scanner afterwards 
-        //use isValidBoard method as a guide
-
 		try {
 			File file = new File("src/tictactoe/"+this.filename);
     		Scanner scanner = new Scanner(file);
@@ -66,10 +60,11 @@ public class Board
 			int row = 0;
 			while (scanner.hasNextLine()) {
 				if (row < 3) {
-					String line = scanner.nextLine().trim()
-					grid[row][0] = line.charAt(0);
-					grid[row][1] = line.charAt(2);
-					grid[row][2] = line.charAt(4);
+					String line = scanner.nextLine().trim();
+					String[] parts = line.split(",");
+					grid[row][0] = parts[0].charAt(0);
+					grid[row][1] = parts[1].charAt(0);
+					grid[row][2] = parts[2].charAt(0);
 					row++;
 				}
 			}
@@ -78,10 +73,7 @@ public class Board
 		catch (Exception error) {
 			error.printStackTrace();
 		}
-    	
     }
-
-  
 
     
     //valid if it resembles a 3x3 board that contains only E, X, O
@@ -95,17 +87,18 @@ public class Board
     		while(scanner.hasNextLine())
     		{
     			String line = scanner.nextLine().trim();
-    			if(!line.matches("[EXO], [EXO], [EXO]"))
+    			if(!line.matches("[EXO],[EXO],[EXO]"))
     			{
     				scanner.close();
     				return false;
     			}
 
     			// count X and O
-    			if (line.charAt(4) == 'X') xCount++;
-
- 
-
+    			for (int i = 0; i < line.length(); i++) {
+    				char c = line.charAt(i);
+    				if (c == 'X') xCount++;
+    				else if (c == 'O') oCount++;
+    			}
     		}
     		scanner.close();
     		return xCount == oCount || xCount == oCount + 1;
@@ -126,14 +119,13 @@ public class Board
     		File file = new File("src/tictactoe/"+this.filename);
     		FileWriter writer = new FileWriter(file);
     		
-    		
     		String boardContents = "";
     		for(int row = 0; row < grid.length; row++)
     		{
     			for(int col = 0; col < grid[0].length; col++)
     			{
-    				if(col < 2) boardContents += grid[row][col];
-    				else boardContents += this.grid[row][col];
+    				if(col < 2) boardContents += grid[row][col] + ",";
+    				else boardContents += grid[row][col];
     			}
     			if(row < 2) boardContents += "\n";
     		}
@@ -145,7 +137,6 @@ public class Board
     	{
     		error.printStackTrace();
     	}
-    
     }
     
     
@@ -167,7 +158,7 @@ public class Board
     	char options[] = {'E', 'X', 'O'};
     	for (int row = 0; row < grid.length; row++) {
     		for (int col = 0; col < grid[0].length; col++) {
-    			int index = (int)Math.random() * options.length; // 0, 1, or 2
+    			int index = (int)(Math.random() * options.length); // 0, 1, or 2
     			grid[row][col] = options[index];
     		}
     	}
@@ -184,8 +175,6 @@ public class Board
     	this.grid = clearedBoard;
     	saveBoardToFile();
     }
-    
-
 
     
     public static void main(String args[])
